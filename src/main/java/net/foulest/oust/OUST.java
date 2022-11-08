@@ -15,6 +15,12 @@ import java.util.regex.Pattern;
 
 public class OUST {
 
+    /**
+     * OUST: Official USA Scraping Tool
+     * by Foulest#0001
+     *
+     * @param args Generic arguments for OUST.
+     */
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
@@ -54,12 +60,19 @@ public class OUST {
         System.out.println();
         System.out.println("Searching for: " + fullName + (location.equals("") ? "" : " in " + location));
 
-        // Searches OfficialUsa.com for the search term.
-        searchForTerm(firstName, lastName, location);
+        // Searches OfficialUsa.com for the search terms & prints the results.
+        searchForResults(firstName, lastName, location);
     }
 
+    /**
+     * Grabs data from OfficialUSA based on the search terms.
+     *
+     * @param firstName The first name to search for.
+     * @param lastName The last name to search for.
+     * @param location The location to search for.
+     */
     @SuppressWarnings("DuplicatedCode")
-    public static void searchForTerm(String firstName, String lastName, String location) {
+    public static void searchForResults(String firstName, String lastName, String location) {
         // Defines the search query depending on our search terms.
         String query = "https://officialusa.com/names/" + firstName + "-" + lastName;
 
@@ -413,6 +426,7 @@ public class OUST {
             }
         }
 
+        // Prints the results found to the console.
         if (resultsFound.size() == 0) {
             System.out.println();
             System.out.println("No results found.");

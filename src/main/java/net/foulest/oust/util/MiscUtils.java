@@ -9,6 +9,11 @@ import java.net.URL;
 
 public class MiscUtils {
 
+    /**
+     * Outputs a website's HTML (or JSON/raw text) source code.
+     *
+     * @param website The website to grab source code from.
+     */
     public static String getWebsiteSrc(String website) {
         try {
             URL url = new URL(website);
@@ -48,6 +53,11 @@ public class MiscUtils {
         return "Not found";
     }
 
+    /**
+     * Converts an InputStream into a String.
+     *
+     * @param is The InputStream to convert.
+     */
     public static String getStringFromStream(InputStream is) {
         StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -57,10 +67,8 @@ public class MiscUtils {
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-
         } catch (IOException ex) {
             ex.printStackTrace();
-
         } finally {
             try {
                 br.close();
