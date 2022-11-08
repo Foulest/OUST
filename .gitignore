@@ -65,6 +65,7 @@ pom.xml.tag
 pom.xml.versionsBackup
 release.properties
 run/
+build/
 target/
 /build/tmp/jar/MANIFEST.MF
 /build/tmp/compileJava/source-classes-mapping.txt

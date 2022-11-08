@@ -64,40 +64,28 @@ public class OUST {
     }
 
     public static void searchForTerm(String firstName, String lastName, String location) {
-        // Defines the search query depending on our search engine.
+        // Defines the search query depending on our search terms.
         String query = "https://officialusa.com/names/" + firstName + "-" + lastName;
 
         // Grabs the website's source code.
         System.out.println("GET -> " + query);
         String websiteSrc = getWebsiteSrc(query);
 
-        // Returns if the website is blocking our connection.
-        // This always means no results can be found.
-        if (websiteSrc.equals("Blocked")) {
-            System.out.println("BLOCKED -> " + query);
+        // Returns if the website's source code could not be found.
+        if (websiteSrc.equals("Not found") || websiteSrc.equals("Blocked")) {
             System.out.println();
             System.out.println("Error: No results found.");
             System.out.println("Try again with a different query.");
             return;
         }
 
-        // Returns if the website source code could not be found.
-        if (websiteSrc.equals("Not found")) {
-            System.out.println("NOT FOUND -> " + query);
-            System.out.println();
-            System.out.println("Error: No results found.");
-            System.out.println("Try again with a different query.");
-            return;
-        }
-
-        // Trim the source code to only include personal information.
+        // Trim the source code to only include the personal information sections.
         String srcTrimmed = websiteSrc.substring(websiteSrc.indexOf("<div class=\"persons detail-block__main-items\">"),
                         websiteSrc.indexOf("<div class=\"detail-block__main-item detail-block__main-item-summary\">"))
                 .concat("</div>");
 
-        // Sets the results variables.
-        int resultsFound = 0;
-        List<List<String>> printResults = new ArrayList<>();
+        // Sets the results found variables.
+        List<List<String>> resultsFound = new ArrayList<>();
 
         // Converts the HTML code into a document.
         Document document = Jsoup.parse(srcTrimmed);
@@ -145,9 +133,6 @@ public class OUST {
                             }
                         }
                     }
-
-                    // Adds a positive result found to the counter.
-                    ++resultsFound;
 
                     for (String line : sectionOne) {
                         // Sets the county on file.
@@ -428,25 +413,23 @@ public class OUST {
                 }
 
                 // Adds the results print string list to the master list.
-                printResults.add(printResult);
+                resultsFound.add(printResult);
             }
         }
 
-        if (resultsFound == 0) {
+        if (resultsFound.size() == 0) {
             System.out.println();
             System.out.println("No results found.");
             System.out.println("Try again with a different query.");
 
         } else {
             System.out.println();
-            System.out.println("Results found: " + resultsFound);
+            System.out.println("Results found: " + resultsFound.size());
 
-            for (List<String> results : printResults) {
+            for (List<String> results : resultsFound) {
                 results.forEach(System.out::println);
             }
         }
-
-        System.exit(0);
     }
 
     public static String getWebsiteSrc(String website) {
