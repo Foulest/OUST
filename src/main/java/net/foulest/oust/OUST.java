@@ -20,8 +20,6 @@ import java.util.regex.Pattern;
 
 public class OUST {
 
-    public static List<String> results = new ArrayList<>();
-
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
@@ -38,7 +36,7 @@ public class OUST {
         Matcher matcher = pattern.matcher(fullName);
 
         // Removes all non-alphanumeric characters from the name.
-        fullName = fullName.replaceAll("[^a-zA-Z0-9 -]", "");
+        fullName = fullName.replaceAll("[^a-zA-Z -]", "");
 
         // Ignores names with invalid space counts.
         if (matcher.results().count() != 1) {
@@ -63,20 +61,6 @@ public class OUST {
 
         // Searches OfficialUsa.com for the search term.
         searchForTerm(firstName, lastName, location);
-
-        // Removes duplicates from results.
-        List<String> trimmedResults = new ArrayList<>(results.stream().distinct().toList());
-        Collections.sort(trimmedResults);
-
-        // Sets the results found.
-        if (trimmedResults.isEmpty()) {
-            System.out.println();
-            System.out.println("No results found.");
-        } else {
-            System.out.println();
-            System.out.println("Results:");
-            trimmedResults.forEach(System.out::println);
-        }
     }
 
     public static void searchForTerm(String firstName, String lastName, String location) {
@@ -88,14 +72,21 @@ public class OUST {
         String websiteSrc = getWebsiteSrc(query);
 
         // Returns if the website is blocking our connection.
+        // This always means no results can be found.
         if (websiteSrc.equals("Blocked")) {
             System.out.println("BLOCKED -> " + query);
+            System.out.println();
+            System.out.println("Error: No results found.");
+            System.out.println("Try again with a different query.");
             return;
         }
 
-        // Returns if website results could not be found.
+        // Returns if the website source code could not be found.
         if (websiteSrc.equals("Not found")) {
             System.out.println("NOT FOUND -> " + query);
+            System.out.println();
+            System.out.println("Error: No results found.");
+            System.out.println("Try again with a different query.");
             return;
         }
 
