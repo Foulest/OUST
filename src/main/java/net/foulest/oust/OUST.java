@@ -58,6 +58,7 @@ public class OUST {
         searchForTerm(firstName, lastName, location);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public static void searchForTerm(String firstName, String lastName, String location) {
         // Defines the search query depending on our search terms.
         String query = "https://officialusa.com/names/" + firstName + "-" + lastName;
