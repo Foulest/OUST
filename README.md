@@ -1,5 +1,5 @@
 # OUST: Official USA Scraping Tool
-Data scraping tool modeled after the http://officialusa.com website.
+Data scraping tool that scrapes the http://officialusa.com website.
 
 This repository was a quick project for some fine folks in the privacy industry.
 
