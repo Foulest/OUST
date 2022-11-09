@@ -1,17 +1,11 @@
 package net.foulest.oust.util;
 
-import net.foulest.oust.OUST;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static net.foulest.oust.OUST.log;
 
 public class MiscUtils {
 
@@ -41,7 +35,7 @@ public class MiscUtils {
             // Tests the connection before grabbing the source code.
             // Return if our connection is blocked by the website, or any other errors occur.
             try {
-                con.getInputStream().close();
+                con.getInputStream();
             } catch (IOException ignored) {
                 return "Blocked";
             }
@@ -53,7 +47,7 @@ public class MiscUtils {
             return websiteSrc;
 
         } catch (Exception ex) {
-            log.log(Level.WARNING, "An error occurred: ", ex);
+            ex.printStackTrace();
         }
 
         return "Not found";
@@ -75,13 +69,13 @@ public class MiscUtils {
             }
 
         } catch (IOException ex) {
-            log.log(Level.WARNING, "An error occurred: ", ex);
+            ex.printStackTrace();
 
         } finally {
             try {
                 br.close();
             } catch (IOException ex) {
-                log.log(Level.WARNING, "An error occurred: ", ex);
+                ex.printStackTrace();
             }
         }
 

@@ -10,13 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OUST {
-
-    public static final Logger log = Logger.getLogger(OUST.class.getName());
 
     /**
      * OUST: Official USA Scraping Tool
@@ -71,8 +68,8 @@ public class OUST {
      * Grabs data from OfficialUSA based on the search terms.
      *
      * @param firstName The first name to search for.
-     * @param lastName The last name to search for.
-     * @param location The location to search for.
+     * @param lastName  The last name to search for.
+     * @param location  The location to search for.
      */
     @SuppressWarnings("DuplicatedCode")
     public static void searchForResults(String firstName, String lastName, String location) {
