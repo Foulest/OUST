@@ -10,10 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OUST {
+
+    public static final Logger log = Logger.getLogger(OUST.class.getName());
 
     /**
      * OUST: Official USA Scraping Tool
